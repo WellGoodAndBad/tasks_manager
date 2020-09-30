@@ -6,13 +6,6 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class RecursiveSerializer(serializers.Serializer):
-    """Вывод рекурсивно children"""
-    def to_representation(self, value):
-        serializer = self.parent.parent.__class__(value, context=self.context)
-        return serializer.data
-
-
 class HistoryTaskSerialiser(serializers.ModelSerializer):
 
     class Meta:
