@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY',  'o+g&xdyt7+=%48l-4dzzv&=7o5$18fr@94b0bbnai6mns49(4k')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -83,16 +83,17 @@ WSGI_APPLICATION = 'tasks_manager.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": os.environ.get("SQL_ENGINE", 'django.db.backends.postgresql',),
+        "NAME": os.environ.get("SQL_DATABASE", "postgres"),
+        "USER": os.environ.get("SQL_USER", "postgres"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "postgres"),
+        "HOST": os.environ.get("SQL_HOST", "db"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -147,8 +148,8 @@ DJOSER = {
 
 ACCOUNT_EMAIL_REQUIRED = False
 
-
-try:
-    from local_settings import *
-except ImportError:
-    pass
+if DEBUG:
+    try:
+        from local_settings import *
+    except ImportError:
+        pass
