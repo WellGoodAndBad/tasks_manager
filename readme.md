@@ -15,13 +15,13 @@ curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'username=<
 ##### для создания задачи(task): - /api/v1/create_task/
 
 пример запроса:
-curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Authorization: Token <TOKEN>"  -d 'title=<title>&description=<description_task>&status=<status_task>&planned_completion_date=<planned_date>' 'http://127.0.0.1:8000/api/v1/create_task/'
+curl -X POST -H "Content-Type: application/x-www-form-urlencoded" -H "Authorization: Token <TOKEN>"  -d 'title=<title>&description=<description_task>&status=<status>&planned_completion_date=<planned_date>' 'http://127.0.0.1:8000/api/v1/create_task/'
 
 ##### для запроса всех задач: - /api/v1/tasks/
 
-возможные параметры: -  status_tasks(/api/v1/tasks/?status_tasks=<status_tasks), 
+возможные параметры: -  status(/api/v1/tasks/?status=<status>), 
 planned_completion_date (/api/v1/tasks/?planned_completion_date=<planned_date>), 
-или оба вместе (/api/v1/tasks/?status_tasks=<status>&planned_completion_date=<1999-12-13>),
+или оба вместе (/api/v1/tasks/?status=<status>&planned_completion_date=<1999-12-13>),
 
 пример запроса:
 curl -H "Content-Type: application/x-www-form-urlencoded" -H "Authorization: Token <TOKEN>" 'http://127.0.0.1:8000/api/v1/tasks/'
@@ -30,4 +30,4 @@ curl -H "Content-Type: application/x-www-form-urlencoded" -H "Authorization: Tok
 
 пример запроса:
 curl -X POST -H "Content-Type: application/x-www-form-urlencoded" 
--H "Authorization: Token <TOKEN>" -d 'title=<title>&description=<description_task>&status=<status_task>&planned_completion_date=<1999-12-29>' 'http://127.0.0.1:8000/api/v1/task_update/<id_task>/'
+-H "Authorization: Token <TOKEN>" -d 'title=<title>&description=<description_task>&status=<status>&planned_completion_date=<1999-12-29>' 'http://127.0.0.1:8000/api/v1/task_update/<id_task>/'

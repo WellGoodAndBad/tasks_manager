@@ -28,7 +28,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -137,6 +136,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 
 DJOSER = {
@@ -150,6 +150,6 @@ ACCOUNT_EMAIL_REQUIRED = False
 
 if DEBUG:
     try:
-        from local_settings import *
+        from .local_settings import *
     except ImportError:
         pass
